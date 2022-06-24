@@ -1,11 +1,13 @@
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
+
 plugins {
     id("org.springframework.boot") version "2.3.5.RELEASE"
     id("io.spring.dependency-management") version "1.0.10.RELEASE"
     id("org.jetbrains.kotlin.plugin.jpa") version "1.4.20-RC"
     kotlin("jvm") version "1.4.10"
     kotlin("plugin.spring") version "1.4.10"
+    id("io.gitlab.arturbosch.detekt") version "1.21.0-RC1"
 }
 
 group = "ru.netology"
@@ -14,6 +16,16 @@ java.sourceCompatibility = JavaVersion.VERSION_1_8
 
 repositories {
     mavenCentral()
+allproject {
+  apply from: "$rootDir/detekt.gradle"
+  repositories {
+    maven {
+      url = uri("https://plugins.gradle.org/m2/")
+    }
+  }
+dependencies {
+    classpath("io.gitlab.arturbosch.detekt:detekt-gradle-plugin:1.21.0-RC1")
+  }
 }
 
 dependencies {
